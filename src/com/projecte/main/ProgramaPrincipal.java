@@ -5,8 +5,12 @@ import com.projecte.ionatan.CridarIonatan;
 public class ProgramaPrincipal {
 
 	public static void main(String[] args) {
-		// Cridar noms Alumnes
-		CridarIonatan.cridarIonatan();
+		// Importar noms de membres del grup
+		CridarIonatan cridarIonatan = new CridarIonatan();
+
+		
+		// Cridar a membres del grup
+		cridarIonatan.cridarIonatan();
 
 	}
 

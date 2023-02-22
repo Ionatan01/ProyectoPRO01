@@ -1,7 +1,9 @@
 package com.projecte.ionatan;
 
 public class CridarIonatan {
-	public static void cridarIonatan() {
+	
+	// Metode que mostra per pantalla el nom de Ionatan
+	public void cridarIonatan() {
 		System.out.println("Ionatan Muntean");
 	}
 }
