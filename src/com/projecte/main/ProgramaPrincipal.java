@@ -1,5 +1,7 @@
 package com.projecte.main;
 
+import com.projecte.christian.CridarChristian;
+import com.projecte.hugo.CridarHugo;
 import com.projecte.ionatan.CridarIonatan;
 
 public class ProgramaPrincipal {
