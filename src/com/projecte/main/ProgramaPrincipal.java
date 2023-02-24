@@ -1,6 +1,5 @@
 package com.projecte.main;
 
-import com.projecte.christian.CridarChristian;
 import com.projecte.ionatan.CridarIonatan;
 
 public class ProgramaPrincipal {
@@ -9,12 +8,13 @@ public class ProgramaPrincipal {
 		// Importar noms de membres del grup
 		CridarIonatan cridarIonatan = new CridarIonatan();
 		CridarChristian cridarChristian = new CridarChristian();
+		CridarHugo cridarHugo = new CridarHugo();
 
-		
 		// Cridar a membres del grup
+		System.out.println("Membres: ");
 		cridarIonatan.cridarIonatan();
 		cridarChristian.cridarChristian();
-		
+		cridarHugo.cridarHugo();
 	}
 
 }
