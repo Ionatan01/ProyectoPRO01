@@ -20,6 +20,7 @@ public class ProgramaPrincipal {
 		cridarChristian.cridarChristian();
 		cridarHugo.cridarHugo();
 		cridarJuanen.CridarJuanen();
+		System.out.println("hola");
 	}
 
 }
