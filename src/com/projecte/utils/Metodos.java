@@ -1,5 +1,6 @@
 package com.projecte.utils;
 
+import java.io.File;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -16,7 +17,6 @@ public class Metodos {
 		boolean correcto = false;
 		String nom;
 		do {
-			System.out.print("Nombre: ");
 			nom = leer.nextLine().trim();
 			Matcher matcher = comprobarNombre.matcher(nom);
 			correcto = matcher.matches();
@@ -33,7 +33,6 @@ public class Metodos {
 		boolean correcto = false;
 		String email;
 		do {
-			System.out.print("Email: ");
 			email = leer.nextLine().trim();
 			Matcher matcher = comprobarEmail.matcher(email);
 			correcto = matcher.matches();
@@ -51,7 +50,6 @@ public class Metodos {
 		Date fechaNaixement = null;
 		String fecha;
 		do {
-			System.out.print("Fecha nacimiento (dd/mm/yyyy): ");
 			fecha = leer.nextLine().trim();
 			Matcher matcher = comprobarNombre.matcher(fecha);
 			correcto = matcher.matches();
@@ -74,8 +72,6 @@ public class Metodos {
 		boolean correcto = false;
 		String contrasena1, contrasena2;
 		do {
-			System.out.print("Contraseña: ");
-
 			contrasena1 = leer.nextLine().trim();
 			Matcher matcher = comprobarNombre.matcher(contrasena1);
 			correcto = matcher.matches();
@@ -113,4 +109,51 @@ public class Metodos {
 
 	}
 
+	public static String DemanarContrasenaLogin(Scanner leer) {
+		Pattern comprobarNombre = Pattern.compile("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,15}$");
+		boolean correcto = false;
+		String contrasena1;
+		do {
+			contrasena1 = leer.nextLine().trim();
+			Matcher matcher = comprobarNombre.matcher(contrasena1);
+			correcto = matcher.matches();
+			if (contrasena1.isBlank() || contrasena1.contains(" ") || !correcto || contrasena1.length() < 6) {
+				System.out.println("\n ---- Escribe una contraseña segura ----");
+				System.out.println("\t*Al menos un digito");
+				System.out.println("\t*Al menos una mayuscula");
+				System.out.println("\t*Al menos una minuscula");
+				System.out.println("\t*De 6 a 20 caracteres\n");
+			}
+		} while (contrasena1.isBlank() || contrasena1.contains(" ") || contrasena1.length() < 6 || (correcto == false));
+		return contrasena1;
+	}
+
+	public static boolean CrearDirectorioUsuario(String nombre) {
+		File directorio = new File("usuarios" + File.separator + nombre.toLowerCase());
+		boolean existe = directorio.exists();
+		if (directorio.mkdirs()) {
+			System.out.println("\nDirectorio del usuario creado");
+		} else {
+			System.out.println("\nError al crear directorio");
+		}
+		return existe;
+	}
+
+	public static void CrearFitxerosUsuario(String nombre) {
+		try {
+			File actorsFile = new File("usuarios" + File.separator + nombre.toLowerCase() + File.separator + "actors"
+					+ nombre.toLowerCase() + ".dades");
+			actorsFile.createNewFile();
+			File peliculesFile = new File("usuarios" + File.separator + nombre.toLowerCase() + File.separator
+					+ "pelicules" + nombre.toLowerCase() + ".dades");
+			peliculesFile.createNewFile();
+			File directorsFile = new File("usuarios" + File.separator + nombre.toLowerCase() + File.separator
+					+ "directors" + nombre.toLowerCase() + ".dades");
+			directorsFile.createNewFile();
+
+		} catch (Exception e) {
+			System.out.println("::ERROR::");
+		}
+
+	}
 }

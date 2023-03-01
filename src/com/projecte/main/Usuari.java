@@ -1,20 +1,17 @@
 package com.projecte.main;
 
 import java.util.Date;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-import com.projecte.utils.Metodos;
+import com.projecte.utils.*;
 
 public class Usuari implements Accions {
 
+	private static int contador = 0;
+
 	// Atributs
 
-	private static int id;
+	private int id;
 	private String nom;
 	private String cognoms;
 	private String correuElectronic;
@@ -27,7 +24,7 @@ public class Usuari implements Accions {
 
 	public Usuari(String nom, String cognoms, String correuElectronic, String contraseña, String poblacio,
 			Date dataNaixement) {
-		Usuari.id = id++;
+		this.id = incrementarContador();
 		this.nom = nom;
 		this.cognoms = cognoms;
 		this.correuElectronic = correuElectronic;
@@ -37,31 +34,55 @@ public class Usuari implements Accions {
 	}
 
 	// Metodos
+
+	public static void Login() {
+		Scanner leerScanner = new Scanner(System.in);
+		System.out.print("Nombre: ");
+		String nomString = Metodos.demanarNom(leerScanner);
+		System.out.print("Contraseña: ");
+		String contrasenaLogin = Metodos.DemanarContrasenaLogin(leerScanner);
+
+		try {
+
+		} catch (Exception e) {
+			System.out.println("Error:: Usuario no encontrado");
+		}
+
+	}
+
 	public static void registro() {
 		Scanner leerScanner = new Scanner(System.in);
+		System.out.print("Nombre: ");
 		String nomString = Metodos.demanarNom(leerScanner);
+		System.out.print("Apellido: ");
 		String cognomString = Metodos.demanarNom(leerScanner);
+		System.out.print("Correo: ");
 		String correoString = Metodos.demanarEmail(leerScanner);
-		String contrasenaString = Metodos.demanarContrasena(leerScanner);
+		System.out.print("Poblacion: ");
 		String poblacioString = Metodos.demanarNom(leerScanner);
+		System.out.print("Contraseña: ");
+		String contrasenaString = Metodos.demanarContrasena(leerScanner);
+		System.out.print("Fecha nacimiento dd/mm/yyyy: ");
 		Date fechaNaixement = Metodos.demanarFecha(leerScanner);
 
 		try {
 			Usuari usuari = new Usuari(nomString, cognomString, correoString, contrasenaString, poblacioString,
 					fechaNaixement);
-			System.out.println("Correcto:: Usuario guardado");
-			System.out.println(usuari.getNom());
-			System.out.println(usuari.getCognoms());
-			System.out.println(usuari.getContraseña());
-			System.out.println(usuari.getRol());
-			System.out.println(usuari.getCorreuElectronic());
-			System.out.println(usuari.getDataNaixement());
-			System.out.println(Usuari.getId());
+			if (Metodos.CrearDirectorioUsuario(usuari.nom) == true) {
+				System.out.println("Usuario ya existe");
+			} else {
+				Metodos.CrearFitxerosUsuario(usuari.nom);
+			}
+			System.out.println(usuari.toString());
 
 		} catch (Exception e) {
 			System.out.println("Error:: Usuario no guardado");
 		}
 
+	}
+
+	private static int incrementarContador() {
+		return contador++;
 	}
 
 	// getters y setters
@@ -122,13 +143,21 @@ public class Usuari implements Accions {
 		this.dataNaixement = dataNaixement;
 	}
 
-	public static int getId() {
+	public int getId() {
 		return id;
 	}
 
-	public static void setId(int id) {
-		Usuari.id = id;
+	public void setId(int id) {
+		this.id = id;
 	}
+
+	@Override
+	public String toString() {
+		return "Usuari [id=" + id + ", nom=" + nom + ", cognoms=" + cognoms + ", correuElectronic=" + correuElectronic
+				+ ", contraseña=" + contraseña + ", poblacio=" + poblacio + ", rol=" + rol + ", dataNaixement="
+				+ dataNaixement + "]";
+	}
+
 	// Metodos interfaz
 
 	@Override

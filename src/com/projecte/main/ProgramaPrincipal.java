@@ -6,6 +6,7 @@ import com.projecte.christian.CridarChristian;
 import com.projecte.hugo.CridarHugo;
 import com.projecte.ionatan.CridarIonatan;
 import com.projecte.juanen.CridarJuanen;
+import com.projecte.utils.*;
 
 public class ProgramaPrincipal {
 	public void menuLoginRegistre() {
