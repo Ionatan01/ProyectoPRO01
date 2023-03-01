@@ -52,6 +52,7 @@ public class ProgramaPrincipal {
 		switch (elegirOpcionMenuLoginRegistre()) {
 		case 1: {
 			System.out.println("\t\n ---- Login ----");
+			Usuari.Login();
 			break;
 		}
 		case 2: {
