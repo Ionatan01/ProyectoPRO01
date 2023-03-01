@@ -1,4 +1,4 @@
-package www.Juanen.DAW;
+package com.projecte.juanen;
 import java.util.Scanner;
 
 public class juanen {
