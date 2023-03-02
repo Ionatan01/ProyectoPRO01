@@ -1,5 +1,7 @@
 package com.projecte.main;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -37,18 +39,28 @@ public class Usuari implements Accions {
 
 	public static void Login() {
 		Scanner leerScanner = new Scanner(System.in);
+		  String linea;
+		  boolean contraseñaEncontrada = false;
+	        boolean usuarioEncontrado=false;
 		System.out.print("Nombre: ");
 		String nomString = Metodos.demanarNom(leerScanner);
 		System.out.print("Contraseña: ");
 		String contrasenaLogin = Metodos.DemanarContrasenaLogin(leerScanner);
 
-		try {
-
-		} catch (Exception e) {
+		try (BufferedReader br = new BufferedReader(new FileReader("usuarios.txt"))) {
+            while ((linea = br.readLine()) != null) {
+                if (linea.contains(nomString) && linea.contains(contrasenaLogin)) {
+  		 usuarioEncontrado = true;
+                    contraseñaEncontrada = true;
+                    break;
+                }
+            }
+        		 
+		}catch (Exception e) {
 			System.out.println("Error:: Usuario no encontrado");
 		}
 
-	}
+	
 
 	public static void registro() {
 		Scanner leerScanner = new Scanner(System.in);

@@ -1,12 +1,17 @@
 package com.projecte.juanen;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class juanen {
 
-	 public static void main(String[] args) {
+	 public static boolean main(String[] args) {
 	      
 	        Usuario usuario = new Usuario("Juan", "Pérez", "juan123", "password");
-	        
+	        boolean contraseñaEncontrada = false;
+	        boolean usuarioEncontrado=false;
+	        String linea;
 
 	   
 	        Scanner scanner = new Scanner(System.in);
@@ -14,6 +19,23 @@ public class juanen {
 	        String nombreUsuario = scanner.nextLine();
 	        System.out.print("Contraseña: ");
 	        String contraseña = scanner.nextLine();
+	       
+
+	        try (BufferedReader br = new BufferedReader(new FileReader("usuarios.txt"))) {
+	            while ((linea = br.readLine()) != null) {
+	                if (linea.contains(nombreUsuario) && linea.contains(contraseña)) {
+	  		 usuarioEncontrado = true;
+	                    contraseñaEncontrada = true;
+	                    break;
+	                }
+	            }
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+
+	        return contraseñaEncontrada;
+	    
+	
 
 
 	       // if (!usuario.esCredencialValida(nombreUsuario, contraseña)) {
@@ -21,9 +43,8 @@ public class juanen {
 	           // return;
 	        //}
 
-	        System.out.println("¡Bienvenido, " + usuario.getNombreCompleto() + "!");
-
-	     
+	        System.out.println("¡Bienvenido, " + nombreUsuario.getNombreCompleto() + "!");
+	        public static void mostrarMenu() {
 	        while (true) {
 	            System.out.println("¿Qué te gustaría hacer?");
 	            System.out.println("1. Ver listado de películas");
@@ -41,21 +62,27 @@ public class juanen {
 	       
 	            switch (opcion) {
 	                case 1:
+	                	mostrarPeliculas(usuario);
 	                    System.out.println("Mostrando listado de películas...");
 	                    break;
 	                case 2:
+	                	mostrarActores(usuario);
 	                    System.out.println("Mostrando listado de actores...");
 	                    break;
 	                case 3:
+	                	mostrarDirectores(usuario);
 	                    System.out.println("Mostrando listado de directores...");
 	                    break;
 	                case 4:
+	                	AñadirPeliculas(usuario);
 	                    System.out.println("Añadiendo película...");
 	                    break;
 	                case 5:
+	                	AñadirActor(usuario);
 	                    System.out.println("Añadiendo actor...");
 	                    break;
 	                case 6:
+	                	AñadirDirector(usuario);
 	                    System.out.println("Añadiendo director...");
 	                    break;
 	                case 7:
