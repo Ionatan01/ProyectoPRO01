@@ -59,6 +59,7 @@ public class Usuari implements Accions {
 		}catch (Exception e) {
 			System.out.println("Error:: Usuario no encontrado");
 		}
+	}
 
 	
 
