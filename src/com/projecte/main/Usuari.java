@@ -60,6 +60,63 @@ public class Usuari implements Accions {
 			System.out.println("Error:: Usuario no encontrado");
 		}
 	}
+	
+	public  void mostrarMenu() {
+		Scanner leerScanner = new Scanner(System.in);
+		int opcion =0;
+		 System.out.println("¡Bienvenido, " + nom + "!");
+		 while (true) {
+	            System.out.println("¿Qué te gustaría hacer?");
+	            System.out.println("1. Ver listado de películas");
+	            System.out.println("2. Ver listado de actores");
+	            System.out.println("3. Ver listado de directores");
+	            System.out.println("4. Añadir película");
+	            System.out.println("5. Añadir actor");
+	            System.out.println("6. Añadir director");
+	            System.out.println("7. Salir");
+
+	          
+	            System.out.print("Opción: ");
+	            opcion=leerScanner.nextInt();
+
+	       
+	            switch (opcion) {
+	                case 1:
+	                	mostrarPeliculas(nom);
+	                    System.out.println("Mostrando listado de películas...");
+	                    break;
+	                case 2:
+	                	mostrarActores(nom);
+	                    System.out.println("Mostrando listado de actores...");
+	                    break;
+	                case 3:
+	                	mostrarDirectores(nom);
+	                    System.out.println("Mostrando listado de directores...");
+	                    break;
+	                case 4:
+	                	AñadirPeliculas(nom);
+	                    System.out.println("Añadiendo película...");
+	                    break;
+	                case 5:
+	                	AñadirActor(nom);
+	                    System.out.println("Añadiendo actor...");
+	                    break;
+	                case 6:
+	                	AñadirDirector(nom);
+	                    System.out.println("Añadiendo director...");
+	                    break;
+	                case 7:
+	                    System.out.println("¡Hasta luego!");
+	                    return;
+	                default:
+	                    System.out.println("Opción inválida. Por favor, elige una opción válida.");
+	                    break;
+	            }
+	        }
+		
+		
+	}
+	
 
 	
 
