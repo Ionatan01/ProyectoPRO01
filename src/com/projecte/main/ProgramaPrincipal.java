@@ -72,5 +72,9 @@ public class ProgramaPrincipal {
 		programa.inici();
 
 	}
+	
+	
+	
+	
 
 }

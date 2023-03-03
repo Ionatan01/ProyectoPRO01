@@ -2,12 +2,13 @@ package com.projecte.main;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Scanner;
 
 import com.projecte.utils.*;
 
-public class Usuari implements Accions {
+public class Usuari implements Accions, Serializable {
 
 	private static int contador = 0;
 
@@ -24,8 +25,7 @@ public class Usuari implements Accions {
 
 	// constructor
 
-	public Usuari(String nom, String cognoms, String correuElectronic, String contraseña, String poblacio,
-			Date dataNaixement) {
+	public Usuari() {
 		this.id = incrementarContador();
 		this.nom = nom;
 		this.cognoms = cognoms;
@@ -34,6 +34,23 @@ public class Usuari implements Accions {
 		this.poblacio = poblacio;
 		this.dataNaixement = dataNaixement;
 	}
+	
+	
+
+	public Usuari(int id, String nom, String cognoms, String correuElectronic, String contraseña, String poblacio,
+			String rol, Date dataNaixement) {
+		super();
+		this.id = id;
+		this.nom = nom;
+		this.cognoms = cognoms;
+		this.correuElectronic = correuElectronic;
+		this.contraseña = contraseña;
+		this.poblacio = poblacio;
+		this.rol = rol;
+		this.dataNaixement = dataNaixement;
+	}
+
+
 
 	// Metodos
 
@@ -82,27 +99,27 @@ public class Usuari implements Accions {
 	       
 	            switch (opcion) {
 	                case 1:
-	                	mostrarPeliculas(nom);
+	                	//mostrarPeliculas(nom);
 	                    System.out.println("Mostrando listado de películas...");
 	                    break;
 	                case 2:
-	                	mostrarActores(nom);
+	                	//mostrarActores(nom);
 	                    System.out.println("Mostrando listado de actores...");
 	                    break;
 	                case 3:
-	                	mostrarDirectores(nom);
+	                	//mostrarDirectores(nom);
 	                    System.out.println("Mostrando listado de directores...");
 	                    break;
 	                case 4:
-	                	AñadirPeliculas(nom);
+	                	//AñadirPeliculas(nom);
 	                    System.out.println("Añadiendo película...");
 	                    break;
 	                case 5:
-	                	AñadirActor(nom);
+	                	//AñadirActor(nom);
 	                    System.out.println("Añadiendo actor...");
 	                    break;
 	                case 6:
-	                	AñadirDirector(nom);
+	                	//AñadirDirector(nom);
 	                    System.out.println("Añadiendo director...");
 	                    break;
 	                case 7:
@@ -136,8 +153,8 @@ public class Usuari implements Accions {
 		Date fechaNaixement = Metodos.demanarFecha(leerScanner);
 
 		try {
-			Usuari usuari = new Usuari(nomString, cognomString, correoString, contrasenaString, poblacioString,
-					fechaNaixement);
+			Usuari usuari = new Usuari(contador, nomString, cognomString, correoString, contrasenaString, poblacioString,
+					contrasenaString, fechaNaixement);
 			if (Metodos.CrearDirectorioUsuario(usuari.nom) == true) {
 				System.out.println("Usuario ya existe");
 			} else {
@@ -177,6 +194,14 @@ public class Usuari implements Accions {
 		return correuElectronic;
 	}
 
+	public String getNomCorreuElectronic() {
+		String correo = this.getCorreuElectronic();
+		String [] correoSeparado;
+		
+		correoSeparado = correo.split("@");
+		return correoSeparado[0];
+	}
+	
 	public void setCorreuElectronic(String correuElectronic) {
 		this.correuElectronic = correuElectronic;
 	}
@@ -226,6 +251,12 @@ public class Usuari implements Accions {
 		return "Usuari [id=" + id + ", nom=" + nom + ", cognoms=" + cognoms + ", correuElectronic=" + correuElectronic
 				+ ", contraseña=" + contraseña + ", poblacio=" + poblacio + ", rol=" + rol + ", dataNaixement="
 				+ dataNaixement + "]";
+	}
+	
+	public String toStringParaGuardar() {
+		return id + "," + nom + "," + cognoms + "," + correuElectronic
+				+ "," + contraseña + "," + poblacio + "," + rol + ","
+				+ dataNaixement;
 	}
 
 	// Metodos interfaz
