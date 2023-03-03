@@ -3,6 +3,7 @@ package com.projecte.main;
 import java.util.Scanner;
 
 import com.projecte.christian.CridarChristian;
+import com.projecte.classes.Usuari;
 import com.projecte.hugo.CridarHugo;
 import com.projecte.ionatan.CridarIonatan;
 import com.projecte.juanen.CridarJuanen;
