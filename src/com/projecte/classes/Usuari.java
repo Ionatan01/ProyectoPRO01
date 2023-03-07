@@ -1,8 +1,9 @@
-package com.projecte.main;
+package com.projecte.classes;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -10,38 +11,26 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Scanner;
 
-import com.projecte.ionatan.GuardarObjeto;
 import com.projecte.utils.*;
 
 public class Usuari implements Accions, Serializable {
 
-	private static int contador = 0;
-
 	// Atributs
-	public enum tipusRol {
-		ROL_ADMIN, ROL_USUARI
-	}
+		public enum tipusRol {
+			ROL_ADMIN, ROL_USUARI
+		}
 
-	private int id;
-	private String nom;
-	private String cognoms;
-	private String correuElectronic;
-	private String contraseña;
-	private String poblacio;
-	private tipusRol rol;
-	private Date dataNaixement;
+		private int id;
+		private String nom;
+		private String cognoms;
+		private String correuElectronic;
+		private String contraseña;
+		private String poblacio;
+		private tipusRol rol;
+		private Date dataNaixement;
 
 	// constructor
-
-	public Usuari() {
-		this.id = incrementarContador();
-		this.nom = nom;
-		this.cognoms = cognoms;
-		this.correuElectronic = correuElectronic;
-		this.contraseña = contraseña;
-		this.poblacio = poblacio;
-		this.dataNaixement = dataNaixement;
-	}
+	File directorio1 = new File("usuarios" + File.separator);
 
 	public Usuari(int id, String nom, String cognoms, String correuElectronic, String contraseña, String poblacio,
 			Date dataNaixement) {
@@ -56,7 +45,7 @@ public class Usuari implements Accions, Serializable {
 		this.dataNaixement = dataNaixement;
 	}
 
-	// Metodos
+	// MetodoLogin
 
 	public static void Login() {
 		Scanner leerScanner = new Scanner(System.in);
@@ -64,13 +53,14 @@ public class Usuari implements Accions, Serializable {
 		boolean contraseñaEncontrada = false;
 		boolean usuarioEncontrado = false;
 		System.out.print("Nombre: ");
-		String nomString = Metodos.demanarNom(leerScanner);
+		String emailString = Login.demanarEmail(leerScanner);
 		System.out.print("Contraseña: ");
-		String contrasenaLogin = Metodos.DemanarContrasenaLogin(leerScanner);
+		String contrasenaLogin = Login.DemanarContrasenaLogin(leerScanner);
 
 		try (BufferedReader br = new BufferedReader(new FileReader("usuarios.txt"))) {
 			while ((linea = br.readLine()) != null) {
-				if (linea.contains(nomString) && linea.contains(contrasenaLogin)) {
+				if (linea.contains(emailString) && linea.contains(contrasenaLogin)) {
+					System.out.println("Usuario encontrado");
 					usuarioEncontrado = true;
 					contraseñaEncontrada = true;
 					break;
@@ -80,99 +70,74 @@ public class Usuari implements Accions, Serializable {
 		} catch (Exception e) {
 			System.out.println("Error:: Usuario no encontrado");
 		}
-	}
 
-	public void mostrarMenu() {
-		Scanner leerScanner = new Scanner(System.in);
-		int opcion = 0;
-		System.out.println("¡Bienvenido, " + nom + "!");
-		while (true) {
-			System.out.println("¿Qué te gustaría hacer?");
-			System.out.println("1. Ver listado de películas");
-			System.out.println("2. Ver listado de actores");
-			System.out.println("3. Ver listado de directores");
-			System.out.println("4. Añadir película");
-			System.out.println("5. Añadir actor");
-			System.out.println("6. Añadir director");
-			System.out.println("7. Salir");
-
-			System.out.print("Opción: ");
-			opcion = leerScanner.nextInt();
-
-			switch (opcion) {
-			case 1:
-				// mostrarPeliculas(nom);
-				System.out.println("Mostrando listado de películas...");
-				break;
-			case 2:
-				// mostrarActores(nom);
-				System.out.println("Mostrando listado de actores...");
-				break;
-			case 3:
-				// mostrarDirectores(nom);
-				System.out.println("Mostrando listado de directores...");
-				break;
-			case 4:
-				// AñadirPeliculas(nom);
-				System.out.println("Añadiendo película...");
-				break;
-			case 5:
-				// AñadirActor(nom);
-				System.out.println("Añadiendo actor...");
-				break;
-			case 6:
-				// AñadirDirector(nom);
-				System.out.println("Añadiendo director...");
-				break;
-			case 7:
-				System.out.println("¡Hasta luego!");
-				return;
-			default:
-				System.out.println("Opción inválida. Por favor, elige una opción válida.");
-				break;
-			}
+		if (contraseñaEncontrada == true && usuarioEncontrado == true) {
+		} else {
 		}
 
 	}
 
+	// MetodoRegistro
+
 	public static void registro() {
 		Scanner leerScanner = new Scanner(System.in);
 		System.out.print("Nombre: ");
-		String nomString = Metodos.demanarNom(leerScanner);
+		String nomString = Registre.demanarNom(leerScanner);
 		System.out.print("Apellido: ");
-		String cognomString = Metodos.demanarNom(leerScanner);
+		String cognomString = Registre.demanarNom(leerScanner);
 		System.out.print("Correo: ");
-		String correoString = Metodos.demanarEmail(leerScanner);
+		String correoString = Registre.demanarEmail(leerScanner);
 		System.out.print("Poblacion: ");
-		String poblacioString = Metodos.demanarNom(leerScanner);
+		String poblacioString = Registre.demanarNom(leerScanner);
 		System.out.print("Contraseña: ");
-		String contrasenaString = Metodos.demanarContrasena(leerScanner);
+		String contrasenaString = Registre.demanarContrasena(leerScanner);
 		System.out.print("Fecha nacimiento dd/mm/yyyy: ");
-		Date fechaNaixement = Metodos.demanarFecha(leerScanner);
+		Date fechaNaixement = Registre.demanarFecha(leerScanner);
 
-		try {
-			// Cambiar 2 per metode contador
-			// Cambiar 2 per metode contador
-			// Cambiar 2 per metode contador
-			// Cambiar 2 per metode contador
-			Usuari usuari = new Usuari(2, nomString, cognomString, correoString, contrasenaString, poblacioString, fechaNaixement);
-			// Cambiar 2 per metode contador
-			// Cambiar 2 per metode contador
-			// Cambiar 2 per metode contador
-			// Cambiar 2 per metode contador
+			try {
+				// Cambiar 2 per metode contador
+				// Cambiar 2 per metode contador
+				// Cambiar 2 per metode contador
+				// Cambiar 2 per metode contador
+				Usuari usuari = new Usuari(siguienteId(), nomString, cognomString, correoString, contrasenaString, poblacioString, fechaNaixement);
+				// Cambiar 2 per metode contador
+				// Cambiar 2 per metode contador
+				// Cambiar 2 per metode contador
+				// Cambiar 2 per metode contador
 
-			crear(usuari);
-			
-			System.out.println(usuari.toString());
+				crear(usuari);
+				
+				System.out.println(usuari.toString());
 
 		} catch (Exception e) {
 			System.out.println("Error:: Usuario no guardado");
 		}
 
 	}
-
-	private static int incrementarContador() {
-		return contador++;
+	
+	public static int siguienteId() {
+		int ultimoIdAsignado = 0;
+		File ficheroALeer = new File("dades/usuaris.txt");
+		Scanner entrada;
+		String lineaActual = "";
+		String[] paraulesLineaActual;
+		int contador = 1;
+		try {
+			entrada = new Scanner(ficheroALeer);
+			while (entrada.hasNextLine()) {
+				// Assignar valors
+				lineaActual = entrada.nextLine();
+				paraulesLineaActual = lineaActual.split(":");
+				ultimoIdAsignado = Integer.parseInt(paraulesLineaActual[0]);
+				
+			}
+		} catch (FileNotFoundException e) {
+			System.out.println("No se ha podido leer el fichero: dades/usuaris.txt -> " + e);
+		}
+		
+		
+		
+		return ultimoIdAsignado + 1;
 	}
 
 	// getters y setters
@@ -196,7 +161,7 @@ public class Usuari implements Accions, Serializable {
 	public String getCorreuElectronic() {
 		return correuElectronic;
 	}
-
+	
 	public String getNomCorreuElectronic() {
 		String correo = this.getCorreuElectronic();
 		String[] correoSeparado;
@@ -241,9 +206,9 @@ public class Usuari implements Accions, Serializable {
 		return id;
 	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
+//	public void setId(int id) {
+//		this.id = id;
+//	}
 
 	@Override
 	public String toString() {
@@ -263,9 +228,9 @@ public class Usuari implements Accions, Serializable {
 		FileWriter fw;
 		// Crear metodo para retornar solo parte de delante del correo
 		File carpeta = new File("usuarios/" + p.getId() + p.getNomCorreuElectronic());
-		File peliculas = new File(carpeta + "/p.dades");
-		File actores = new File(carpeta + "/a.dades");
-		File directores = new File(carpeta + "/d.dades");
+		File peliculas = new File(carpeta + "/p.llista");
+		File actores = new File(carpeta + "/a.llista");
+		File directores = new File(carpeta + "/d.llista");
 
 		try {
 			fw = new FileWriter("dades/usuaris.txt", true);
@@ -295,6 +260,12 @@ public class Usuari implements Accions, Serializable {
 		}
 
 	}
+	
+	@Override
+	public void crear() {
+		// TODO Auto-generated method stub
+
+	}
 
 	@Override
 	public void consultar() {
@@ -312,12 +283,6 @@ public class Usuari implements Accions, Serializable {
 	public void modificar() {
 		// TODO Auto-generated method stub
 
-	}
-
-	@Override
-	public void crear() {
-		// TODO Auto-generated method stub
-		
 	}
 
 }
