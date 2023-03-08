@@ -16,18 +16,18 @@ import com.projecte.utils.*;
 public class Usuari implements Accions, Serializable {
 
 	// Atributs
-		public enum tipusRol {
-			ROL_ADMIN, ROL_USUARI
-		}
+	public enum tipusRol {
+		ROL_ADMIN, ROL_USUARI
+	}
 
-		private int id;
-		private String nom;
-		private String cognoms;
-		private String correuElectronic;
-		private String contraseña;
-		private String poblacio;
-		private tipusRol rol;
-		private Date dataNaixement;
+	private int id;
+	private String nom;
+	private String cognoms;
+	private String correuElectronic;
+	private String contraseña;
+	private String poblacio;
+	private tipusRol rol;
+	private Date dataNaixement;
 
 	// constructor
 	File directorio1 = new File("usuarios" + File.separator);
@@ -94,16 +94,9 @@ public class Usuari implements Accions, Serializable {
 		System.out.print("Fecha nacimiento dd/mm/yyyy: ");
 		Date fechaNaixement = Registre.demanarFecha(leerScanner);
 
-			try {
-				// Cambiar 2 per metode contador
-				// Cambiar 2 per metode contador
-				// Cambiar 2 per metode contador
-				// Cambiar 2 per metode contador
-			// Cambiar 2 per metode contador
-			// Cambiar 2 per metode contador
-			// Cambiar 2 per metode contador
-			// Cambiar 2 per metode contador
-
+		try {
+			Usuari usuari = new Usuari(siguienteId(), nomString, cognomString, correoString, contrasenaString,
+					poblacioString, fechaNaixement);
 			crear(usuari);
 
 			System.out.println(usuari.toString());
