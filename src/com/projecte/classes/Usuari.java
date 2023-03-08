@@ -99,22 +99,21 @@ public class Usuari implements Accions, Serializable {
 				// Cambiar 2 per metode contador
 				// Cambiar 2 per metode contador
 				// Cambiar 2 per metode contador
-				Usuari usuari = new Usuari(siguienteId(), nomString, cognomString, correoString, contrasenaString, poblacioString, fechaNaixement);
-				// Cambiar 2 per metode contador
-				// Cambiar 2 per metode contador
-				// Cambiar 2 per metode contador
-				// Cambiar 2 per metode contador
+			// Cambiar 2 per metode contador
+			// Cambiar 2 per metode contador
+			// Cambiar 2 per metode contador
+			// Cambiar 2 per metode contador
 
-				crear(usuari);
-				
-				System.out.println(usuari.toString());
+			crear(usuari);
+
+			System.out.println(usuari.toString());
 
 		} catch (Exception e) {
 			System.out.println("Error:: Usuario no guardado");
 		}
 
 	}
-	
+
 	public static int siguienteId() {
 		int ultimoIdAsignado = 0;
 		File ficheroALeer = new File("dades/usuaris.txt");
@@ -129,14 +128,11 @@ public class Usuari implements Accions, Serializable {
 				lineaActual = entrada.nextLine();
 				paraulesLineaActual = lineaActual.split(":");
 				ultimoIdAsignado = Integer.parseInt(paraulesLineaActual[0]);
-				
+
 			}
 		} catch (FileNotFoundException e) {
 			System.out.println("No se ha podido leer el fichero: dades/usuaris.txt -> " + e);
 		}
-		
-		
-		
 		return ultimoIdAsignado + 1;
 	}
 
@@ -161,7 +157,7 @@ public class Usuari implements Accions, Serializable {
 	public String getCorreuElectronic() {
 		return correuElectronic;
 	}
-	
+
 	public String getNomCorreuElectronic() {
 		String correo = this.getCorreuElectronic();
 		String[] correoSeparado;
@@ -226,11 +222,16 @@ public class Usuari implements Accions, Serializable {
 
 	public static void crear(Usuari p) {
 		FileWriter fw;
+		String nomUsuari = p.getNomCorreuElectronic();
+		int idUsuari = p.getId();
 		// Crear metodo para retornar solo parte de delante del correo
-		File carpeta = new File("usuarios/" + p.getId() + p.getNomCorreuElectronic());
-		File peliculas = new File(carpeta + "/p.llista");
-		File actores = new File(carpeta + "/a.llista");
-		File directores = new File(carpeta + "/d.llista");
+		File carpeta = new File("usuarios/" + idUsuari + nomUsuari);
+		File peliculas = new File(carpeta + "/pelicules" + nomUsuari.substring(0, 1).toUpperCase()
+				+ nomUsuari.substring(1, nomUsuari.length()) + ".llista");
+		File actores = new File(carpeta + "/actors" + nomUsuari.substring(0, 1).toUpperCase()
+				+ nomUsuari.substring(1, nomUsuari.length()) + ".llista");
+		File directores = new File(carpeta + "/directors " + nomUsuari.substring(0, 1).toUpperCase()
+				+ nomUsuari.substring(1, nomUsuari.length()) + ".llista");
 
 		try {
 			fw = new FileWriter("dades/usuaris.txt", true);
@@ -260,7 +261,7 @@ public class Usuari implements Accions, Serializable {
 		}
 
 	}
-	
+
 	@Override
 	public void crear() {
 		// TODO Auto-generated method stub

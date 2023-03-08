@@ -33,8 +33,6 @@ public class ProgramaPrincipal {
 			switch (Menus.elegirOpcionMenu(1, 3)) {
 			case 1:
 				File directorio1 = new File("usuarios" + File.separator);
-				int id = directorio1.list().length;
-				System.out.println(id);
 				Usuari.registro();
 				break;
 			case 2:
