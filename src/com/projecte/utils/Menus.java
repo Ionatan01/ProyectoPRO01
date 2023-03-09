@@ -2,6 +2,7 @@ package com.projecte.utils;
 
 import java.util.Scanner;
 
+import com.projecte.classes.CrearActorUsuarioGlobal;
 import com.projecte.classes.CrearDirectorUsuarioGlobal;
 import com.projecte.classes.CrearPeliculaUsuarioGlobal;
 
@@ -24,7 +25,13 @@ public class Menus {
 		return numEleccion;
 	}
 
+	public static void limpiarConsola() {
+		System.out.print("\033[H\033[2J");
+		System.out.flush();
+	}
+
 	public static void menuPrincipalLoginRegistre() {
+		limpiarConsola();
 		System.out.println("\n---- Menu ---- ");
 		System.out.println("1.- Registre");
 		System.out.println("2.- Login");
@@ -36,6 +43,7 @@ public class Menus {
 		boolean salir = false;
 
 		while (!salir) {
+			limpiarConsola();
 			System.out.println("\n¡Bienvenido, " + nom + " " + cognoms + "!");
 			System.out.println("\n\t---- Menu ---- ");
 			System.out.println("1. Ver listado de películas");
@@ -48,16 +56,15 @@ public class Menus {
 
 			switch (elegirOpcionMenu(1, 7)) {
 			case 1:
-				// mostrarPeliculas(nom);
 				System.out.println("Mostrando listado de películas...");
 				CrearPeliculaUsuarioGlobal.listarPeliculas(id, nomCorreo);;
 				break;
 			case 2:
-				// mostrarActores(nom);
 				System.out.println("Mostrando listado de actores...");
+				CrearActorUsuarioGlobal.listarActores(id, nomCorreo);
+
 				break;
 			case 3:
-				// mostrarDirectores(nom);
 				System.out.println("Mostrando listado de directores: ");
 				CrearDirectorUsuarioGlobal.listarDirectores(id, nomCorreo);
 				break;
@@ -67,11 +74,10 @@ public class Menus {
 				CrearPeliculaUsuarioGlobal.agregarPelicula(id, nomCorreo);;
 				break;
 			case 5:
-				// AñadirActor(nom);
-				System.out.println("Añadiendo actor...");
+				CrearActorUsuarioGlobal.agregarActor(id, nomCorreo);
+				System.out.println("Actor añadido!");
 				break;
 			case 6:
-				// AñadirDirector(nom);
 				CrearDirectorUsuarioGlobal.agregarDirector(id, nomCorreo);
 				System.out.println("Director añadido!");
 				break;
