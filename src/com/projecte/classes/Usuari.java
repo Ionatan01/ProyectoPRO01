@@ -8,6 +8,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -113,7 +115,6 @@ public class Usuari implements Accions, Serializable {
 		Scanner entrada;
 		String lineaActual = "";
 		String[] paraulesLineaActual;
-		int contador = 1;
 		try {
 			entrada = new Scanner(ficheroALeer);
 			while (entrada.hasNextLine()) {

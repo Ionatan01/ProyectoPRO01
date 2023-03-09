@@ -1,7 +1,6 @@
 package com.projecte.utils;
 
 import java.io.File;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -41,11 +40,19 @@ public class Registre {
 		return email;
 	}
 
+	public static Date crearFecha(String fecha) {
+		try {
+			return new SimpleDateFormat("dd/MM/yyyy").parse(fecha);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return null;
+
+	}
+
 	public static Date demanarFecha(Scanner leer) {
-		DateFormat format = new SimpleDateFormat("DD/MM/YYYY");
 		Pattern comprobarNombre = Pattern.compile("([0-9]{2})/([0-9]{2})/([0-9]{4})");
 		boolean correcto = false;
-		Date fechaNaixement = null;
 		String fecha;
 		do {
 			fecha = leer.nextLine().trim();
@@ -55,14 +62,8 @@ public class Registre {
 				System.out.println("Escribe una fecha correcta");
 			}
 		} while (fecha.isBlank() || fecha.contains(" ") || (correcto == false));
-		try {
-			// convierte un String en formato fecha en una fecha real
-			fechaNaixement = format.parse(fecha);
 
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		return fechaNaixement;
+		return crearFecha(fecha);
 	}
 
 	public static String demanarContrasena(Scanner leer) {

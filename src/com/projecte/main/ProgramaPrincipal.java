@@ -1,7 +1,5 @@
 package com.projecte.main;
 
-import java.io.File;
-
 import com.projecte.christian.CridarChristian;
 import com.projecte.classes.Usuari;
 import com.projecte.hugo.CridarHugo;
@@ -32,7 +30,6 @@ public class ProgramaPrincipal {
 
 			switch (Menus.elegirOpcionMenu(1, 3)) {
 			case 1:
-				File directorio1 = new File("usuarios" + File.separator);
 				Usuari.registro();
 				break;
 			case 2:
@@ -53,9 +50,5 @@ public class ProgramaPrincipal {
 		programa.inici();
 
 	}
-	
-	
-	
-	
 
 }
