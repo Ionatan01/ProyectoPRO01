@@ -1,23 +1,14 @@
 package com.projecte.classes;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -84,6 +75,20 @@ public class CrearDirectorUsuarioGlobal {
 		} catch (IOException e) {
 			System.out.println("Error al guardar los directores en el archivo directores.dades.");
 			e.printStackTrace();
+		}
+	}
+
+	public static void listarDirectores(int id, String nom) {
+		String rutaPersonalString = "usuarios/" + id + nom + "/directors" + nom + ".llista";
+		ArrayList<Director> directoresArrayList = leerFitxeroDirectores(rutaPersonalString);
+
+		for (int i = 0; i < directoresArrayList.size(); i++) {
+			Director director = directoresArrayList.get(i);
+			String separadorString = "";
+			for (int j = 0; j < director.toString().length(); j++) {
+				separadorString += "-";
+			}
+			System.out.println(director.toString() + "\n" + separadorString);
 		}
 	}
 
@@ -227,19 +232,7 @@ public class CrearDirectorUsuarioGlobal {
 //		}
 //	}
 //
-	public static void listarDirectores(int id, String nom) {
-		String rutaPersonalString = "usuarios/" + id + nom + "/directors" + nom + ".llista";
-		ArrayList<Director> directoresArrayList = leerFitxeroDirectores(rutaPersonalString);
 
-		for (int i = 0; i < directoresArrayList.size(); i++) {
-			Director director = directoresArrayList.get(i);
-			String separadorString = "";
-			for (int j = 0; j < director.toString().length(); j++) {
-				separadorString += "-";
-			}
-			System.out.println(director.toString() + "\n" + separadorString);
-		}
-	}
 //
 //	public void buscarDirector() {
 //		Scanner scanner = new Scanner(System.in);
