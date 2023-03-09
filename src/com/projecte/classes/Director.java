@@ -5,14 +5,14 @@ import java.util.List;
 
 public class Director implements Serializable {
 	  private String nombre;
-	    private int edad;
-	    private String nacionalidad;
+	    private int IdDirector;
+	    private String apellidos;
 
 	    // El constructor del director
-	    public Director(String nombre, int edad, String nacionalidad) {
+	    public Director(String nombre, int IdDirector, String apellidos) {
 	        this.nombre = nombre;
-	        this.edad = edad;
-	        this.nacionalidad = nacionalidad;
+	        this.IdDirector = IdDirector;
+	        this.apellidos = apellidos;
 	    }
 
 	    // Los getters y setters
@@ -24,28 +24,28 @@ public class Director implements Serializable {
 	        this.nombre = nombre;
 	    }
 
-	    public int getEdad() {
-	        return edad;
+	    public int getIdDirector() {
+	        return IdDirector;
 	    }
 
-	    public void setEdad(int edad) {
-	        this.edad = edad;
+	    public void setIdDirector(int IdDirector) {
+	        this.IdDirector = IdDirector;
 	    }
 
-	    public String getNacionalidad() {
-	        return nacionalidad;
+	    public String getapellidos() {
+	        return apellidos;
 	    }
 
-	    public void setNacionalidad(String nacionalidad) {
-	        this.nacionalidad = nacionalidad;
+	    public void setapellidos(String apellidos) {
+	        this.apellidos = apellidos;
 	    }
 
 	    // metodo para mostrar directores
 	    public static void mostrarDirectores(List<Director> directores) {
 	        for (Director director : directores) {
 	            System.out.println("Nombre: " + director.getNombre());
-	            System.out.println("Edad: " + director.getEdad());
-	            System.out.println("Nacionalidad: " + director.getNacionalidad());
+	            System.out.println("ID_Director: " + director.getIdDirector());
+	            System.out.println("Nacionalidad: " + director.getapellidos());
 	        }
 	    }
 	    //metodo para añadir directores
