@@ -260,8 +260,8 @@ class CrearPeliculaUsuarioGlobal {
 			String linea;
 			while ((linea = br.readLine()) != null) {
 				String[] atributos = linea.split(",");
-				System.out.println("Título: " + atributos[0] + "\nAño: " + atributos[1] + "\nDirector: " + atributos[2]
-						+ "\nGénero: " + atributos[3] + "\n----------------------------");
+				System.out.println("Título: " + atributos[0]  + "\nAño: " + atributos[1] +  "\nDirector: "
+						+ atributos[2]  + "\nGénero: " + atributos[3] +  "\n----------------------------");
 
 			}
 		} catch (FileNotFoundException e) {
