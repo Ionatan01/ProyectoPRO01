@@ -29,7 +29,7 @@ public class Menus {
 
 	}
 
-	public static void menuLogeado(String nom, String cognoms) {
+	public static void menuLogeado(Integer id, String nom, String cognoms) {
 		boolean salir = false;
 
 		while (!salir) {
@@ -42,6 +42,7 @@ public class Menus {
 			System.out.println("5. Añadir actor");
 			System.out.println("6. Añadir director");
 			System.out.println("7. Salir");
+
 			switch (elegirOpcionMenu(1, 7)) {
 			case 1:
 				// mostrarPeliculas(nom);

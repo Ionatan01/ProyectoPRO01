@@ -70,11 +70,11 @@ public class Usuari implements Accions, Serializable {
 				while ((linea = br.readLine()) != null) {
 					if (linea.contains(emailString) && linea.contains(contrasenaLogin)) {
 						String[] infoUsuario = linea.split(":::");
-						Usuari usuari = new Usuari(Integer.parseInt(infoUsuario[0]), infoUsuario[1], infoUsuario[2],
-								infoUsuario[3], infoUsuario[4]);
+						int id = Integer.parseInt(infoUsuario[0]);
+						Usuari usuari = new Usuari(id, infoUsuario[1], infoUsuario[2], infoUsuario[3], infoUsuario[4]);
 						usuarioExiste = true;
-						Menus.menuLogeado(infoUsuario[1], infoUsuario[2]);
 
+						Menus.menuLogeado(id, infoUsuario[1], infoUsuario[2]);
 					}
 				}
 				if (usuarioExiste == false) {
@@ -232,7 +232,7 @@ public class Usuari implements Accions, Serializable {
 				+ nomUsuari.substring(1, nomUsuari.length()) + ".llista");
 		File actores = new File(carpeta + "/actors" + nomUsuari.substring(0, 1).toUpperCase()
 				+ nomUsuari.substring(1, nomUsuari.length()) + ".llista");
-		File directores = new File(carpeta + "/directors " + nomUsuari.substring(0, 1).toUpperCase()
+		File directores = new File(carpeta + "/directors" + nomUsuari.substring(0, 1).toUpperCase()
 				+ nomUsuari.substring(1, nomUsuari.length()) + ".llista");
 
 		try {
