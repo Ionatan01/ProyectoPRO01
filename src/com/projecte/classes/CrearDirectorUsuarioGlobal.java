@@ -81,14 +81,17 @@ public class CrearDirectorUsuarioGlobal {
 	public static void listarDirectores(int id, String nom) {
 		String rutaPersonalString = "usuarios/" + id + nom + "/directors" + nom + ".llista";
 		ArrayList<Director> directoresArrayList = leerFitxeroDirectores(rutaPersonalString);
-
-		for (int i = 0; i < directoresArrayList.size(); i++) {
-			Director director = directoresArrayList.get(i);
-			String separadorString = "";
-			for (int j = 0; j < director.toString().length(); j++) {
-				separadorString += "-";
+		if (directoresArrayList.size() < 1) {
+			System.out.println("Aún no has añadido ningun actor");
+		} else {
+			for (int i = 0; i < directoresArrayList.size(); i++) {
+				Director director = directoresArrayList.get(i);
+				String separadorString = "";
+				for (int j = 0; j < director.toString().length() + 4; j++) {
+					separadorString += "-";
+				}
+				System.out.println(i + " - " + director.toString() + "\n" + separadorString);
 			}
-			System.out.println(director.toString() + "\n" + separadorString);
 		}
 	}
 
