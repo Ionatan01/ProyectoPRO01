@@ -34,6 +34,16 @@ public class Usuari implements Accions, Serializable {
 	// constructor
 	File directorio1 = new File("usuarios" + File.separator);
 
+	public Usuari(int id, String nom, String cognoms, String correuElectronic, String contraseña) {
+		super();
+		this.id = id;
+		this.nom = nom;
+		this.cognoms = cognoms;
+		this.correuElectronic = correuElectronic;
+		this.contraseña = contraseña;
+		this.rol = tipusRol.ROL_USUARI;
+	}
+
 	public Usuari(int id, String nom, String cognoms, String correuElectronic, String contraseña, String poblacio,
 			Date dataNaixement) {
 		super();
@@ -52,30 +62,30 @@ public class Usuari implements Accions, Serializable {
 	public static void Login() {
 		Scanner leerScanner = new Scanner(System.in);
 		String linea;
-		boolean contraseñaEncontrada = false;
-		boolean usuarioEncontrado = false;
-		System.out.print("Nombre: ");
-		String emailString = Login.demanarEmail(leerScanner);
-		System.out.print("Contraseña: ");
-		String contrasenaLogin = Login.DemanarContrasenaLogin(leerScanner);
+		boolean usuarioExiste = false;
+		do {
+			System.out.print("Correo: ");
+			String emailString = Login.demanarEmail(leerScanner);
+			System.out.print("Contraseña: ");
+			String contrasenaLogin = Login.DemanarContrasenaLogin(leerScanner);
+			try (BufferedReader br = new BufferedReader(new FileReader("dades/usuaris.txt"))) {
+				while ((linea = br.readLine()) != null) {
+					if (linea.contains(emailString) && linea.contains(contrasenaLogin)) {
+						String[] infoUsuario = linea.split(":::");
+						Usuari usuari = new Usuari(Integer.parseInt(infoUsuario[0]), infoUsuario[1], infoUsuario[2],
+								infoUsuario[3], infoUsuario[4]);
+						usuarioExiste = true;
+						Menus.menuLogeado(infoUsuario[1], infoUsuario[2]);
 
-		try (BufferedReader br = new BufferedReader(new FileReader("usuarios.txt"))) {
-			while ((linea = br.readLine()) != null) {
-				if (linea.contains(emailString) && linea.contains(contrasenaLogin)) {
-					System.out.println("Usuario encontrado");
-					usuarioEncontrado = true;
-					contraseñaEncontrada = true;
-					break;
+					}
 				}
+				if (usuarioExiste == false) {
+					System.out.println("Usuario no encontrado :: Vuelve a escribir la informacion:");
+				}
+			} catch (Exception e) {
+				System.out.println("Error::" + e);
 			}
-
-		} catch (Exception e) {
-			System.out.println("Error:: Usuario no encontrado");
-		}
-
-		if (contraseñaEncontrada == true && usuarioEncontrado == true) {
-		} else {
-		}
+		} while (usuarioExiste == false);
 
 	}
 
@@ -104,7 +114,7 @@ public class Usuari implements Accions, Serializable {
 			System.out.println(usuari.toString());
 
 		} catch (Exception e) {
-			System.out.println("Error:: Usuario no guardado");
+			System.out.println("Error:: Usuario no guardado -->" + e);
 		}
 
 	}
@@ -120,7 +130,7 @@ public class Usuari implements Accions, Serializable {
 			while (entrada.hasNextLine()) {
 				// Assignar valors
 				lineaActual = entrada.nextLine();
-				paraulesLineaActual = lineaActual.split(":");
+				paraulesLineaActual = lineaActual.split(":::");
 				ultimoIdAsignado = Integer.parseInt(paraulesLineaActual[0]);
 
 			}
@@ -208,8 +218,8 @@ public class Usuari implements Accions, Serializable {
 	}
 
 	public String toStringParaGuardar() {
-		return id + ":" + nom + ":" + cognoms + ":" + correuElectronic + ":" + contraseña + ":" + poblacio + ":" + rol
-				+ ":" + dataNaixement;
+		return id + ":::" + nom + ":::" + cognoms + ":::" + correuElectronic + ":::" + contraseña + ":::" + poblacio
+				+ ":::" + rol + ":::" + dataNaixement;
 	}
 
 	// Metodos interfaz
