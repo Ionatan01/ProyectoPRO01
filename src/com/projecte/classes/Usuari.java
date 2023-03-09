@@ -74,7 +74,7 @@ public class Usuari implements Accions, Serializable {
 						Usuari usuari = new Usuari(id, infoUsuario[1], infoUsuario[2], infoUsuario[3], infoUsuario[4]);
 						usuarioExiste = true;
 
-						Menus.menuLogeado(id, infoUsuario[1], infoUsuario[2]);
+						Menus.menuLogeado(id, infoUsuario[1], infoUsuario[2], usuari.getNomCorreuElectronic());
 					}
 				}
 				if (usuarioExiste == false) {

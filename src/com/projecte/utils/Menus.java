@@ -2,6 +2,8 @@ package com.projecte.utils;
 
 import java.util.Scanner;
 
+import com.projecte.classes.CrearDirectorUsuarioGlobal;
+
 public class Menus {
 	static Scanner leerOpcionMenu = new Scanner(System.in);
 
@@ -29,7 +31,7 @@ public class Menus {
 
 	}
 
-	public static void menuLogeado(Integer id, String nom, String cognoms) {
+	public static void menuLogeado(int id, String nom, String cognoms, String nomCorreo) {
 		boolean salir = false;
 
 		while (!salir) {
@@ -54,7 +56,8 @@ public class Menus {
 				break;
 			case 3:
 				// mostrarDirectores(nom);
-				System.out.println("Mostrando listado de directores...");
+				System.out.println("Mostrando listado de directores: ");
+				CrearDirectorUsuarioGlobal.listarDirectores(id, nomCorreo);
 				break;
 			case 4:
 				// AñadirPeliculas(nom);
@@ -66,7 +69,8 @@ public class Menus {
 				break;
 			case 6:
 				// AñadirDirector(nom);
-				System.out.println("Añadiendo director...");
+				CrearDirectorUsuarioGlobal.agregarDirector(id, nomCorreo);
+				System.out.println("Director añadido!");
 				break;
 			case 7:
 				salir = true;
