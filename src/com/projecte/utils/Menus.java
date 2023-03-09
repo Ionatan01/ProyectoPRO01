@@ -34,7 +34,7 @@ public class Menus {
 
 		while (!salir) {
 			System.out.println("\n¡Bienvenido, " + nom + " " + cognoms + "!");
-			System.out.println("\n---- Menu ---- ");
+			System.out.println("\n\t---- Menu ---- ");
 			System.out.println("1. Ver listado de películas");
 			System.out.println("2. Ver listado de actores");
 			System.out.println("3. Ver listado de directores");
