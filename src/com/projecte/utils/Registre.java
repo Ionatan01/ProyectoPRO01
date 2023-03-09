@@ -65,6 +65,26 @@ public class Registre {
 
 		return crearFecha(fecha);
 	}
+	
+	public static int demanarEnter(Scanner leer) {
+		int ano = 0;
+		System.out.println("Introduce el año");
+		// Demanar any
+		do {
+			System.out.println("Introduce un entero (numero entero entre 0 y 2023): ");
+			if (leer.hasNextInt()) {
+				ano = leer.nextInt();
+
+			} else {
+				System.out.println(
+						"El valor introducido no es un entero entre 0 y 2023. Introduce un numero entero.");
+				leer.nextLine();
+
+			}
+		} while ((ano > 2023) || (ano < 0));
+		
+		return ano;
+	}
 
 	public static String demanarContrasena(Scanner leer) {
 		Pattern comprobarNombre = Pattern.compile("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,15}$");

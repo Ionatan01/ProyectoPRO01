@@ -3,6 +3,7 @@ package com.projecte.utils;
 import java.util.Scanner;
 
 import com.projecte.classes.CrearDirectorUsuarioGlobal;
+import com.projecte.classes.CrearPeliculaUsuarioGlobal;
 
 public class Menus {
 	static Scanner leerOpcionMenu = new Scanner(System.in);
@@ -49,6 +50,7 @@ public class Menus {
 			case 1:
 				// mostrarPeliculas(nom);
 				System.out.println("Mostrando listado de películas...");
+				CrearPeliculaUsuarioGlobal.listarPeliculas(id, nomCorreo);;
 				break;
 			case 2:
 				// mostrarActores(nom);
@@ -62,6 +64,7 @@ public class Menus {
 			case 4:
 				// AñadirPeliculas(nom);
 				System.out.println("Añadiendo película...");
+				CrearPeliculaUsuarioGlobal.agregarPelicula(id, nomCorreo);;
 				break;
 			case 5:
 				// AñadirActor(nom);
