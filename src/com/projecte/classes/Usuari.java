@@ -8,8 +8,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Serializable;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -35,7 +33,6 @@ public class Usuari implements Accions, Serializable {
 	File directorio1 = new File("usuarios" + File.separator);
 
 	public Usuari(int id, String nom, String cognoms, String correuElectronic, String contraseña) {
-		super();
 		this.id = id;
 		this.nom = nom;
 		this.cognoms = cognoms;
