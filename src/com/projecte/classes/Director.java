@@ -16,9 +16,13 @@ public class Director implements Serializable {
 		this.id_director = id_director;
 	}
 
-	public String toString() {
-		return "[Id_director: " + this.id_director + " Nombre: " + this.nombre + " Apellidos: " + this.apellidos
-				+ " Nacionalidad: " + this.nacionalidad + "]";
+	public String toLongString() {
+		return "[Id_director -> " + this.id_director + "; Nombre -> " + this.nombre + "; Apellidos -> " + this.apellidos
+				+ "; Nacionalidad -> " + this.nacionalidad + "]";
+	}
+
+	public String toShortString() {
+		return this.nombre + " " + this.apellidos;
 
 	}
 

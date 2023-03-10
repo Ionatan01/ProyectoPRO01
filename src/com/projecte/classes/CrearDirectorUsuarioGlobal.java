@@ -82,184 +82,42 @@ public class CrearDirectorUsuarioGlobal {
 		String rutaPersonalString = "usuarios/" + id + nom + "/directors" + nom + ".llista";
 		ArrayList<Director> directoresArrayList = leerFitxeroDirectores(rutaPersonalString);
 		if (directoresArrayList.size() < 1) {
-			System.out.println("Aún no has añadido ningun actor");
+			System.out.println("--> Aún no has añadido ningun actor");
 		} else {
 			for (int i = 0; i < directoresArrayList.size(); i++) {
 				Director director = directoresArrayList.get(i);
 				String separadorString = "";
-				for (int j = 0; j < director.toString().length() + 4; j++) {
+				for (int j = 0; j < director.toShortString().length() + 4; j++) {
 					separadorString += "-";
 				}
-				System.out.println(i + " - " + director.toString() + "\n" + separadorString);
+				System.out.println((i + 1) + " - " + director.toShortString() + "\n" + separadorString);
+			}
+
+			System.out.println(
+					"\nPulsa 0 para salir al menu principal o selecciona un director para ver mas informacion");
+			int num = elegirOpcionMenu(0, directoresArrayList.size());
+			if (num != 0) {
+				System.out.println("\n" + directoresArrayList.get((num - 1)).toLongString());
 			}
 		}
+
 	}
 
-//	public String toString() {
-//		String listaDirectores = "";
-//		for (int i = 0; i < directoresArrayList.size(); i++) {
-//			Director director = directoresArrayList.get(i);
-//			listaDirectores += director.toString() + "\n";
-//		}
-//		return listaDirectores;
-//
-//	}
-//
-//	public void mostrarDirectoresGlobal() {
-//		try (ObjectInputStream entrada = new ObjectInputStream(new FileInputStream("dades/directors.dades"))) {
-//			directoresArrayList = (ArrayList<Director>) entrada.readObject();
-//		} catch (FileNotFoundException e) {
-//			System.out.println("El archivo directores.dades no existe.");
-//		} catch (IOException | ClassNotFoundException e) {
-//			System.out.println("Error al leer el archivo directores.dades.");
-//			e.printStackTrace();
-//		}
-//
-//		System.out.println("Directores guardadas:");
-//		System.out.println(this.toString()); // Aquí se llama al método toString()
-//	}
-//
-//	public void modificarDirectorGlobal() {
-//		Scanner scanner = new Scanner(System.in);
-//		System.out.println("Introduce el nombre del director que deseas modificar:");
-//		String nombreDirector = scanner.nextLine();
-//		boolean encontrado = false;
-//		ArrayList<Director> actores = null;
-//		try (ObjectInputStream entrada = new ObjectInputStream(new FileInputStream("dades/directors.txt"))) {
-//			directoresArrayList = (ArrayList<Director>) entrada.readObject();
-//		} catch (FileNotFoundException e) {
-//			System.out.println("El archivo directores.dades no existe.");
-//		} catch (IOException | ClassNotFoundException e) {
-//			System.out.println("Error al leer el archivo directores.dades.");
-//			e.printStackTrace();
-//		}
-//
-//		for (int i = 0; i < directoresArrayList.size(); i++) {
-//			Director director = directoresArrayList.get(i);
-//			if (director.getNombre().equals(nombreDirector)) {
-//				System.out.println("Introduce el nuevo nombre del director:");
-//				String nuevoNombre = scanner.nextLine();
-//				System.out.println("Introduce los nuevos apellidos del director:");
-//				String nuevosApellidos = scanner.nextLine();
-//				System.out.println("Introduce la nueva nacionalidad del director:");
-//				String nuevaNacionalidad = scanner.nextLine();
-//				System.out.println("Introduce la nueva fecha de nacimiento del director:");
-//				int nuevoId = scanner.nextInt();
-//
-//				director.setNombre(nuevoNombre);
-//				director.setApellidos(nuevosApellidos);
-//				director.setNacionalidad(nuevaNacionalidad);
-//				director.setId_director(nuevoId);
-//
-//				encontrado = true;
-//				directoresArrayList.set(i, director);
-//				break;
-//			}
-//		}
-//
-//		if (encontrado) {
-//			try {
-//				FileOutputStream leerFile = new FileOutputStream("dades/directors.dades");
-//				ObjectOutputStream objFile = new ObjectOutputStream(leerFile);
-//				objFile.writeObject(directoresArrayList);
-//				objFile.close();
-//				leerFile.close();
-//				System.out.println("Se ha modificado el actor en el archivo directores.dades.");
-//			} catch (IOException e) {
-//				System.out.println("Error al guardar los actores en el archivo directores.dades.");
-//				e.printStackTrace();
-//			}
-//		} else {
-//			System.out.println("El director no se ha encontrado en el archivo directores.dades.");
-//		}
-//	}
-//
-//	public void agregarDirectorPersonalDeGlobal() {
-//		try (ObjectInputStream entrada = new ObjectInputStream(new FileInputStream("dades/directors.dades"))) {
-//			directoresArrayList = (ArrayList<Director>) entrada.readObject();
-//		} catch (FileNotFoundException e) {
-//			System.out.println("El archivo directores.txt no existe.");
-//		} catch (IOException | ClassNotFoundException e) {
-//			System.out.println("Error al leer el archivo directores.txt.");
-//			e.printStackTrace();
-//		}
-//
-//		Scanner ea = new Scanner(System.in);
-//		System.out.print("Ingrese el nombre del actor que desea agregar a su lista personal: ");
-//		String nombre = ea.nextLine();
-//		boolean encontrado = false;
-//
-//		// Buscar el actor en el archivo actores.txt
-//		Director directorAgregado = null;
-//		for (int i = 0; i < directoresArrayList.size(); i++) {
-//			Director director = directoresArrayList.get(i);
-//			if (director.getNombre().equalsIgnoreCase(nombre)) {
-//				encontrado = true;
-//				directorAgregado = director;
-//				break;
-//			}
-//		}
-//
-//		if (!encontrado) {
-//			System.out.println("El director no se encuentra en el archivo directores.dades.");
-//		} else {
-//			System.out.println("El director ha sido encontrado:");
-//			System.out.println(directorAgregado);
-//			try (FileReader fr = new FileReader("ea.txt"); BufferedReader br = new BufferedReader(fr)) {
-//				String linea;
-//				boolean existe = false;
-//				while ((linea = br.readLine()) != null) {
-//					String[] campos = linea.split(",");
-//					if (campos[0].equalsIgnoreCase(directorAgregado.getNombre())) {
-//						System.out.println("El director ya se encuentra en la lista personal.");
-//						existe = true;
-//						break;
-//					}
-//				}
-//				if (!existe) {
-//					try (FileWriter fw = new FileWriter("ea.txt", true);
-//							BufferedWriter bw = new BufferedWriter(fw);
-//							PrintWriter out = new PrintWriter(bw)) {
-//						System.out.println(directorAgregado.getNombre() + "," + directorAgregado.getApellidos() + ","
-//								+ directorAgregado.getNacionalidad() + "," + directorAgregado.getFechaNacimiento());
-//						System.out.println("El director se ha agregado al archivo ea.txt.");
-//					} catch (IOException e) {
-//						System.out.println("Error al guardar el director en el archivo ea.txt.");
-//						e.printStackTrace();
-//					}
-//				}
-//			} catch (IOException e) {
-//				System.out.println("Error al leer el archivo ea.txt.");
-//				e.printStackTrace();
-//			}
-//		}
-//	}
-//
+	public static int elegirOpcionMenu(int min, int max) {
+		Scanner leerOpcion = new Scanner(System.in);
+		int numEleccion = 0;
+		do {
+			System.out.print("Opcion (" + min + "-" + max + "): ");
+			while (!leerOpcion.hasNextInt()) {
+				System.out.println("::ERROR:: Escribe un numero correcto (" + min + "-" + max + ")");
+				leerOpcion.next();
+			}
+			numEleccion = leerOpcion.nextInt();
+			if (numEleccion < min || numEleccion > max) {
+				System.out.println("::ERROR:: Escribe un numero correcto (" + min + "-" + max + ")");
+			}
+		} while (numEleccion < min || numEleccion > max);
+		return numEleccion;
+	}
 
-//
-//	public void buscarDirector() {
-//		Scanner scanner = new Scanner(System.in);
-//		System.out.println("Introduce el nombre del director que deseas buscar:");
-//		String nombreDirector = scanner.nextLine();
-//		boolean encontrado = false;
-//		try (ObjectInputStream entrada = new ObjectInputStream(new FileInputStream("dades/directors.dades"))) {
-//			ArrayList<Director> directores = (ArrayList<Director>) entrada.readObject();
-//			for (int i = 0; i < directores.size(); i++) {
-//				Director director = directores.get(i);
-//				if (director.getNombre().equals(nombreDirector)) {
-//					System.out.println("Director encontrado: \n" + director.toString());
-//					encontrado = true;
-//					break;
-//				}
-//			}
-//			if (!encontrado) {
-//				System.out.println("No se encontró el director con nombre " + nombreDirector);
-//			}
-//		} catch (FileNotFoundException e) {
-//			System.out.println("El archivo directores.txt no existe.");
-//		} catch (IOException | ClassNotFoundException e) {
-//			System.out.println("Error al leer el archivo directores.dades.");
-//			e.printStackTrace();
-//		}
-//	}
 }

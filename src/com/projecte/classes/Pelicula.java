@@ -21,9 +21,13 @@ public class Pelicula implements Serializable {
 		this.genero = genero;
 	}
 
-	public String toString() {
-		return "Título: " + this.titulo + "  --  Año: " + this.ano + "  --  Director: " + this.director + "  --  Género: "
-				+ this.genero;
+	public String toLongString() {
+		return "[Título -> " + this.titulo + "; Año -> " + this.ano + "; Director -> " + this.director + "; Género -> "
+				+ this.genero + "]";
+	}
+
+	public String toShortString() {
+		return this.titulo;
 
 	}
 
@@ -61,4 +65,3 @@ public class Pelicula implements Serializable {
 		this.genero = genero;
 	}
 }
-

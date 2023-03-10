@@ -54,8 +54,8 @@ public class CrearPeliculaUsuarioGlobal {
 		String genero = Registre.demanarNom(leerScanner);
 
 		Pelicula pelicula = new Pelicula(titulo, ano, directorPelicula, genero);
-		//Director director = new Director(nomString, cognomString, poblacioString,
-		//		peliculasArrayListGeneral.size() + 1);
+		// Director director = new Director(nomString, cognomString, poblacioString,
+		// peliculasArrayListGeneral.size() + 1);
 
 		peliculasArrayListGeneral.add(pelicula);
 		peliculasArrayListPersonal.add(pelicula);
@@ -83,13 +83,41 @@ public class CrearPeliculaUsuarioGlobal {
 		String rutaPersonalString = "usuarios/" + id + nom + "/pelicules" + nom + ".llista";
 		ArrayList<Pelicula> peliculasArrayList = leerFitxeroPeliculas(rutaPersonalString);
 
-		for (int i = 0; i < peliculasArrayList.size(); i++) {
-			Pelicula pelicula = peliculasArrayList.get(i);
-			String separadorString = "";
-			for (int j = 0; j < pelicula.toString().length(); j++) {
-				separadorString += "-";
+		if (peliculasArrayList.size() < 1) {
+			System.out.println("--> Aún no has añadido ninguna pelicula");
+		} else {
+			for (int i = 0; i < peliculasArrayList.size(); i++) {
+				Pelicula pelicula = peliculasArrayList.get(i);
+				String separadorString = "";
+				for (int j = 0; j < pelicula.toShortString().length() + 4; j++) {
+					separadorString += "-";
+				}
+				System.out.println((i + 1) + " - " + pelicula.toShortString() + "\n" + separadorString);
 			}
-			System.out.println("\n\n\n" + separadorString + "\n\n" + pelicula.toString() + "\n\n" + separadorString);
+
+			System.out.println(
+					"\nPulsa 0 para salir al menu principal o selecciona una pelicula para ver mas informacion");
+			int num = elegirOpcionMenu(0, peliculasArrayList.size());
+			if (num != 0) {
+				System.out.println("\n" + peliculasArrayList.get((num - 1)).toLongString());
+			}
 		}
+	}
+
+	public static int elegirOpcionMenu(int min, int max) {
+		Scanner leerOpcion = new Scanner(System.in);
+		int numEleccion = 0;
+		do {
+			System.out.print("Opcion (" + min + "-" + max + "): ");
+			while (!leerOpcion.hasNextInt()) {
+				System.out.println("::ERROR:: Escribe un numero correcto (" + min + "-" + max + ")");
+				leerOpcion.next();
+			}
+			numEleccion = leerOpcion.nextInt();
+			if (numEleccion < min || numEleccion > max) {
+				System.out.println("::ERROR:: Escribe un numero correcto (" + min + "-" + max + ")");
+			}
+		} while (numEleccion < min || numEleccion > max);
+		return numEleccion;
 	}
 }

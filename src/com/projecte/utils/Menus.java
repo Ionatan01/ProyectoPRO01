@@ -43,7 +43,6 @@ public class Menus {
 		boolean salir = false;
 
 		while (!salir) {
-			limpiarConsola();
 			System.out.println("\n¡Bienvenido, " + nom + " " + cognoms + "!");
 			System.out.println("\n\t---- Menu ---- ");
 			System.out.println("1. Ver listado de películas");
@@ -56,22 +55,21 @@ public class Menus {
 
 			switch (elegirOpcionMenu(1, 7)) {
 			case 1:
-				System.out.println("Mostrando listado de películas...");
-				CrearPeliculaUsuarioGlobal.listarPeliculas(id, nomCorreo);;
+				System.out.println("\nMostrando listado de películas: \n");
+				CrearPeliculaUsuarioGlobal.listarPeliculas(id, nomCorreo);
 				break;
 			case 2:
-				System.out.println("Mostrando listado de actores...");
+				System.out.println("\nMostrando listado de actores: \n");
 				CrearActorUsuarioGlobal.listarActores(id, nomCorreo);
 
 				break;
 			case 3:
-				System.out.println("Mostrando listado de directores: ");
+				System.out.println("\nMostrando listado de directores: \n");
 				CrearDirectorUsuarioGlobal.listarDirectores(id, nomCorreo);
 				break;
 			case 4:
-				// AñadirPeliculas(nom);
-				System.out.println("Añadiendo película...");
-				CrearPeliculaUsuarioGlobal.agregarPelicula(id, nomCorreo);;
+				CrearPeliculaUsuarioGlobal.agregarPelicula(id, nomCorreo);
+				System.out.println("Pelicula añadida!");
 				break;
 			case 5:
 				CrearActorUsuarioGlobal.agregarActor(id, nomCorreo);
@@ -83,7 +81,7 @@ public class Menus {
 				break;
 			case 7:
 				salir = true;
-				System.out.println("Adios");
+				System.out.println("Adios " + nom + ", Nos vemos pronto!");
 				break;
 
 			}

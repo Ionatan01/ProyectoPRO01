@@ -12,6 +12,7 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import com.projecte.utils.Menus;
 import com.projecte.utils.Registre;
 
 public class CrearActorUsuarioGlobal {
@@ -42,8 +43,8 @@ public class CrearActorUsuarioGlobal {
 		String rutaGeneralString = "dades/actors.dades";
 		String rutaPersonalString = "usuarios/" + id + nom + "/actors" + nom + ".llista";
 
-		ArrayList<Actor> directoresArrayListGeneral = leerFitxeroActores(rutaGeneralString);
-		ArrayList<Actor> directoresArrayListPersonal = leerFitxeroActores(rutaPersonalString);
+		ArrayList<Actor> actoresArrayListGeneral = leerFitxeroActores(rutaGeneralString);
+		ArrayList<Actor> actoresArrayListPersonal = leerFitxeroActores(rutaPersonalString);
 
 		Scanner leerScanner = new Scanner(System.in);
 		System.out.print("Nombre del actor: ");
@@ -53,13 +54,13 @@ public class CrearActorUsuarioGlobal {
 		System.out.print("Nacionalidad del actor: ");
 		String nacionalidadString = Registre.demanarNom(leerScanner);
 
-		Actor actor = new Actor(nom, cognomString, nacionalidadString);
+		Actor actor = new Actor(nom, cognomString, nacionalidadString, actoresArrayListGeneral.size() + 1);
 
-		directoresArrayListGeneral.add(actor);
-		directoresArrayListPersonal.add(actor);
+		actoresArrayListGeneral.add(actor);
+		actoresArrayListPersonal.add(actor);
 
-		guardarActorGlobal(rutaGeneralString, directoresArrayListGeneral);
-		guardarActorGlobal(rutaPersonalString, directoresArrayListPersonal);
+		guardarActorGlobal(rutaGeneralString, actoresArrayListGeneral);
+		guardarActorGlobal(rutaPersonalString, actoresArrayListPersonal);
 
 	}
 
@@ -83,17 +84,41 @@ public class CrearActorUsuarioGlobal {
 		System.out.println();
 
 		if (actoresArrayList.size() < 1) {
-			System.out.println("Aún no has añadido ningun actor");
+			System.out.println("--> Aún no has añadido ningun actor");
 		} else {
 			for (int i = 0; i < actoresArrayList.size(); i++) {
 				Actor actor = actoresArrayList.get(i);
 				String separadorString = "";
-				for (int j = 0; j < actor.toString().length() + 4; j++) {
+				for (int j = 0; j < actor.toShortString().length() + 4; j++) {
 					separadorString += "-";
 				}
-				System.out.println(i + " - " + actor.toString() + "\n" + separadorString);
+				System.out.println((i + 1) + " - " + actor.toShortString() + "\n" + separadorString);
 			}
+
+			System.out.println("\nPulsa 0 para salir al menu principal o selecciona un actor para ver mas informacion");
+			int num = elegirOpcionMenu(0, actoresArrayList.size());
+			if (num != 0) {
+				System.out.println("\n" + actoresArrayList.get((num - 1)).toLongString());
+			}
+
 		}
 
+	}
+
+	public static int elegirOpcionMenu(int min, int max) {
+		Scanner leerOpcion = new Scanner(System.in);
+		int numEleccion = 0;
+		do {
+			System.out.print("Opcion (" + min + "-" + max + "): ");
+			while (!leerOpcion.hasNextInt()) {
+				System.out.println("::ERROR:: Escribe un numero correcto (" + min + "-" + max + ")");
+				leerOpcion.next();
+			}
+			numEleccion = leerOpcion.nextInt();
+			if (numEleccion < min || numEleccion > max) {
+				System.out.println("::ERROR:: Escribe un numero correcto (" + min + "-" + max + ")");
+			}
+		} while (numEleccion < min || numEleccion > max);
+		return numEleccion;
 	}
 }

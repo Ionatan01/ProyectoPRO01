@@ -65,7 +65,7 @@ public class Registre {
 
 		return crearFecha(fecha);
 	}
-	
+
 	public static int demanarEnter(Scanner leer) {
 		int ano = 0;
 		System.out.println("Introduce el año");
@@ -76,13 +76,12 @@ public class Registre {
 				ano = leer.nextInt();
 
 			} else {
-				System.out.println(
-						"El valor introducido no es un entero entre 0 y 2023. Introduce un numero entero.");
+				System.out.println("El valor introducido no es un entero entre 0 y 2023. Introduce un numero entero.");
 				leer.nextLine();
 
 			}
 		} while ((ano > 2023) || (ano < 0));
-		
+
 		return ano;
 	}
 
@@ -122,49 +121,6 @@ public class Registre {
 		} else {
 			System.out.println("Les contraseñes no coincideixen, torna a escriureles:");
 			return demanarContrasena(leer);
-		}
-
-	}
-
-	public static boolean CrearDirectorioUsuario(String correo) {
-		File directorio1 = new File("usuarios" + File.separator);
-		int id = directorio1.list().length + 1;
-		int posicionArrova = correo.indexOf('@');
-		correo = correo.substring(0, posicionArrova);
-		File directorio = new File("usuarios" + File.separator + id + "-" + correo.toLowerCase());
-
-		boolean existe = directorio.exists();
-		if (directorio.mkdirs()) {
-			System.out.println("\nDirectorio del usuario creado");
-		} else {
-			System.out.println("\nError al crear directorio");
-		}
-		return existe;
-	}
-
-	public static void CrearFitxerosUsuario(String correo) {
-
-		File directorio1 = new File("usuarios" + File.separator);
-		int id = directorio1.list().length;
-
-		int posicionArrova = correo.indexOf('@');
-		correo = correo.substring(0, posicionArrova);
-		try {
-			File actorsFile = new File("usuarios" + File.separator + id + "-" + correo.toLowerCase() + File.separator
-					+ "actors" + correo.substring(0, 1).toUpperCase()
-					+ correo.substring(1, correo.length()).toLowerCase() + "-" + id + ".llista");
-			actorsFile.createNewFile();
-			File peliculesFile = new File("usuarios" + File.separator + id + "-" + correo.toLowerCase() + File.separator
-					+ "pelicules" + correo.substring(0, 1).toUpperCase()
-					+ correo.substring(1, correo.length()).toLowerCase() + "-" + id + ".llista");
-			peliculesFile.createNewFile();
-			File directorsFile = new File("usuarios" + File.separator + id + "-" + correo.toLowerCase() + File.separator
-					+ "directors" + correo.substring(0, 1).toUpperCase()
-					+ correo.substring(1, correo.length()).toLowerCase() + "-" + id + ".llista");
-			directorsFile.createNewFile();
-
-		} catch (Exception e) {
-			System.out.println(e);
 		}
 
 	}

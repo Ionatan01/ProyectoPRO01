@@ -1,9 +1,6 @@
 package com.projecte.classes;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.Scanner;
 
 public class Actor implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -12,16 +9,20 @@ public class Actor implements Serializable {
 	private String nacionalidad;
 	private int id_actor;
 
-	public Actor(String nombre, String apellidos, String nacionalidad) {
+	public Actor(String nombre, String apellidos, String nacionalidad, int id_actor) {
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.nacionalidad = nacionalidad;
 		this.id_actor = id_actor;
 	}
 
-	public String toString() {
-		return "[Id_director: " + this.id_actor + " Nombre: " + this.nombre + " Apellidos: " + this.apellidos
-				+ " Nacionalidad: " + this.nacionalidad + "]";
+	public String toLongString() {
+		return "[Id_actor -> " + this.id_actor + "; Nombre -> " + this.nombre + "; Apellidos -> " + this.apellidos
+				+ "; Nacionalidad -> " + this.nacionalidad + "]";
+	}
+
+	public String toShortString() {
+		return this.nombre + " " + this.apellidos;
 
 	}
 

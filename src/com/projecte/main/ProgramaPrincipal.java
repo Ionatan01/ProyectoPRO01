@@ -38,7 +38,7 @@ public class ProgramaPrincipal {
 				break;
 			case 3:
 				salir = true;
-				System.out.println("Adios");
+				System.out.println("Adios, que vaya bien!");
 				break;
 			}
 		}
